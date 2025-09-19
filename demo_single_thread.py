@@ -32,7 +32,7 @@ def sum_prime(n):
 
 
 
-for i in range(100000,1100000,100000):
+for i in range(1000,100000,1000):
     sum_prime(i)
 
 end = time.time()

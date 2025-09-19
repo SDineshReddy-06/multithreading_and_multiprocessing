@@ -5,7 +5,7 @@ import time
 
 
 
-print_lock = threading.Lock()
+# print_lock = threading.Lock()
 start = time.time()
 
 def is_prime(n):
@@ -26,14 +26,14 @@ def sum_prime(n):
     end_time = time.time()
     duration = end_time-start_time
 
-    with print_lock:
-        print(f"For range till {n} the Sum: {sum} in {duration:.4f} seconds")
-        print("-"*40)
+    # with print_lock:
+    print(f"For range till {n} the Sum: {sum} in {duration:.4f} seconds")
+    print("-"*40)
     
 
 threads = []
 
-for i in range(100000,1100000,100000):
+for i in range(1000,100000,1000):
     t = threading.Thread(target=sum_prime,args=(i,))
     threads.append(t)
     t.start()
