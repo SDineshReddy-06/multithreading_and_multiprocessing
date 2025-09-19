@@ -1,0 +1,47 @@
+import threading
+import math
+import time
+
+
+
+
+print_lock = threading.Lock()
+start = time.time()
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(math.sqrt(n))+1):
+        if n%i == 0:
+            return False
+        
+    return True
+
+def sum_prime(n):
+    start_time = time.time()
+    sum = 0
+    for i in range(2,n):
+        if is_prime(i):
+            sum += i
+    end_time = time.time()
+    duration = end_time-start_time
+
+    with print_lock:
+        print(f"For range till {n} the Sum: {sum} in {duration:.4f} seconds")
+        print("-"*40)
+    
+
+threads = []
+
+for i in range(100000,1100000,100000):
+    t = threading.Thread(target=sum_prime,args=(i,))
+    threads.append(t)
+    t.start()
+
+for i in threads:
+    i.join()
+
+end = time.time()
+duration = end-start
+
+print(f"All threads completed in {duration:.4f}")
